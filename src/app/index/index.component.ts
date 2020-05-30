@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { TimerService } from '../timer.service';
 
 @Component({
   selector: 'app-index',
@@ -7,9 +8,10 @@ import { Component, OnInit } from '@angular/core';
 })
 export class IndexComponent implements OnInit {
 
-  constructor() { }
+  constructor( public timerService: TimerService) { }
 
-  ngOnInit(): void {
+  ngOnInit() {
+    this.timerService.start(1000);
   }
 
 }
