@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ListService } from '../list.service';
+import { LoggerService } from '../logger.service';
+
 
 @Component({
   selector: 'app-list',
@@ -8,9 +10,12 @@ import { ListService } from '../list.service';
 })
 export class ListComponent implements OnInit {
 
-  constructor(public listService: ListService) { }
+  constructor(public listService: ListService, private loggerService: LoggerService) { 
+    this.loggerService.add("ListComponent Constructed")
+  }
 
-  ngOnInit(): void {
+  ngOnInit(){
+    this.loggerService.add("ListComponent initialized");
   }
 
 }

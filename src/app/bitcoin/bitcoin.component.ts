@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { BitcoinService } from '../bitcoin.service';
+import { LoggerService } from '../logger.service';
 
 
 @Component({
@@ -10,11 +11,13 @@ import { BitcoinService } from '../bitcoin.service';
 export class BitcoinComponent implements OnInit {
 
 
-  constructor(public bitcoinService: BitcoinService) {
+  constructor(public bitcoinService: BitcoinService, private loggerService: LoggerService) { 
+    this.loggerService.add("BitcoinComponent Constructed")
 
   }
 
   ngOnInit() {
+    this.loggerService.add("BitcoinComponent initialized");
     this.update();
   }
 
@@ -24,7 +27,9 @@ export class BitcoinComponent implements OnInit {
   }
 
   update() {
+    
     this.bitcoinService.update();
+    this.loggerService.add("BitcoinComponent updated");
   }
 
 }

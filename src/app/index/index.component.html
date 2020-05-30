@@ -2,3 +2,7 @@
 <div>
     {{this.timerService.getCount()}}
 </div>
+<h2>Log messages</h2>
+<ul>
+    <li *ngFor="let message of this.loggerService.messages">{{message}}</li>
+</ul>

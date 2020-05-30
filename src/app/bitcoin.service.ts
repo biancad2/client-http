@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { LoggerService } from './logger.service';
 
-interface Response{
+interface Response {
   time: {
     updated: string;
   };
@@ -16,7 +17,7 @@ interface Response{
   };
 }
 
-interface PriceUpdate{
+interface PriceUpdate {
   timestamp: Date;
   USD: number;
   GBP: number;
@@ -27,27 +28,27 @@ interface PriceUpdate{
   providedIn: 'root'
 })
 export class BitcoinService {
-  
+
   currentPrice: Response;
   lastUpdate: Date;
 
   updateList: Array<PriceUpdate> = [];
 
-  constructor(private http: HttpClient) { }
-  update(){
+  constructor(private http: HttpClient, private loggerService: LoggerService) { this.loggerService.add("TimerService constructed")}
+  update() {
     this.http.get<Response>('https://api.coindesk.com/v1/bpi/currentprice.json')
-    .subscribe(data => {
-      this.lastUpdate=new Date();
-      this.currentPrice = data;
-      console.log(data);
-      this.updateList.push({
-        timestamp: this.lastUpdate,
-        USD: this.currentPrice.bpi.USD.rate_float,
-        GBP: this.currentPrice.bpi.GBP.rate_float,
-        EUR: this.currentPrice.bpi.EUR.rate_float,
+      .subscribe(data => {
+        this.lastUpdate = new Date();
+        this.currentPrice = data;
+        console.log(data);
+        this.updateList.push({
+          timestamp: this.lastUpdate,
+          USD: this.currentPrice.bpi.USD.rate_float,
+          GBP: this.currentPrice.bpi.GBP.rate_float,
+          EUR: this.currentPrice.bpi.EUR.rate_float,
 
+        });
       });
-    });
   }
 
 }

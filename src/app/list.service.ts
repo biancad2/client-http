@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { LoggerService } from './logger.service';
 
 interface Item {
   name: string;
@@ -20,12 +21,12 @@ export class ListService {
     this.list.push({ name });
   }
 
-  removeItem(item: Item){
+  removeItem(item: Item) {
     const i = this.list.indexOf(item);
-    if(i > -1){
-      this.list.splice(i,1);
+    if (i > -1) {
+      this.list.splice(i, 1);
     }
   }
- 
-  constructor() { }
+
+  constructor(private loggerService: LoggerService) { this.loggerService.add("ListService constructed"); }
 }
