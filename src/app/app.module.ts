@@ -6,12 +6,14 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { IndexComponent } from './index/index.component';
 import { BitcoinComponent } from './bitcoin/bitcoin.component';
+import { BitcoinBrlComponent } from './bitcoin-brl/bitcoin-brl.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     IndexComponent,
-    BitcoinComponent
+    BitcoinComponent,
+    BitcoinBrlComponent
   ],
   imports: [
     BrowserModule,
