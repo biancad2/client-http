@@ -1,24 +1,23 @@
 <h1>Bitcoin Rates</h1>
 <h2>Time</h2>
-<div *ngIf="currentPrice">
-    <div>{{this.currentPrice.time.updated}}</div>
+<div *ngIf="getCurrentPrice()">
+    <h2>Time</h2>
+    <div>{{this.getCurrentPrice().time.updated}}</div>
     <h2>Disclaimer</h2>
-    <div>{{this.currentPrice.disclaimer}}</div>
+    <div>{{this.getCurrentPrice().disclaimer}}</div>
     <h2>Rates</h2>
-    <h3>{{this.currentPrice.bpi.USD.description}}</h3>
-    <h4><span [innerHTML]="this.currentPrice.bpi.USD.symbol"></span>{{this.currentPrice.bpi.USD.rate}}</h4>
-
-    <h3>{{this.currentPrice.bpi.GBP.description}}</h3>
-    <h4><span [innerHTML]="this.currentPrice.bpi.GBP.symbol"></span>{{this.currentPrice.bpi.GBP.rate}}</h4>
-
-    <h3>{{this.currentPrice.bpi.EUR.description}}</h3>
-    <h4><span [innerHTML]="this.currentPrice.bpi.EUR.symbol"></span>{{this.currentPrice.bpi.EUR.rate}}</h4>
+    <h3>{{this.getCurrentPrice().bpi.USD.description}}</h3>
+    <h4><span [innerHTML]="this.getCurrentPrice().bpi.USD.symbol"></span>&nbsp;{{this.getCurrentPrice().bpi.USD.rate}}</h4>
+    <h3>{{this.getCurrentPrice().bpi.GBP.description}}</h3>
+    <h4><span [innerHTML]="this.getCurrentPrice().bpi.GBP.symbol"></span>&nbsp;{{this.getCurrentPrice().bpi.GBP.rate}}</h4>
+    <h3>{{this.getCurrentPrice().bpi.EUR.description}}</h3>
+    <h4><span [innerHTML]="this.getCurrentPrice().bpi.EUR.symbol"></span>&nbsp;{{this.getCurrentPrice().bpi.EUR.rate}}</h4>
 </div>
 
 <hr />
 <div>
     <input type="button" value="Refresh" (click)="update()" />
-    <span>Updated in {{this.lastUpdate | date: "full"}}</span>
+    <span>Updated in {{this.bitcoinService.lastUpdate | date: "full"}}</span>
 </div>
 <h2>Update history</h2>
 <table class="table">
@@ -28,7 +27,7 @@
         <th scope="col">GBP</th> 
         <th scope="col">EUR</th> 
     </tr>
-    <tr *ngFor="let price of this.updateList">
+    <tr *ngFor="let price of this.bitcoinService.updateList">
         <td>{{price.timestamp | date: "full"}}</td>
         <td>{{price.USD | currency}}</td>
         <td>{{price.GBP | currency}}</td>
